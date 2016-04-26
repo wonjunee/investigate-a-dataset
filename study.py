@@ -109,14 +109,13 @@ if False:
 correlation = (x * y).mean()
 print "Correlation between mean salaries by team and year:", correlation
 
-salaryYearDF1 = pd.DataFrame((salaryYearDF.index.values), index =np.array(range(len(salaryYearDF))), columns = ["mean"])
-salaryYearDF2 = pd.DataFrame(y, index =np.array(range(len(salaryYearDF))))
+""" Find the country with the maximum mean in 2014 """
+salaryYearDF = pd.DataFrame((salaryYearDF.index.values), index =np.array(range(len(salaryYearDF))), columns = ["mean"])
 
-salaryYearDFyear = salaryYearDF1["mean"].map(lambda x: x[0])
-salaryYearDFteam = salaryYearDF1["mean"].map(lambda x: x[1])
+salaryYearDFyear = salaryYearDF["mean"].map(lambda x: x[0])
+salaryYearDFteam = salaryYearDF["mean"].map(lambda x: x[1])
 salaryYearDFsalary = pd.DataFrame(y, index =np.array(range(len(salaryYearDF))), columns = ["mean"])
 
-""" Find the country with the maximum mean in 2014 """
 maxidxSalary2014 = salaryYearDFsalary[salaryYearDFyear == 2014].idxmax()
 maxTeam2014 = salaryYearDFteam[maxidxSalary2014.values[0]]
 print "Team of maximum mean in 2014:", maxTeam2014
