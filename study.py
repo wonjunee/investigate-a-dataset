@@ -39,7 +39,7 @@ if False:
 salariesDF_by_year = salariesDF[["yearID","salary"]].groupby("yearID").agg([np.sum,np.max,np.min,np.mean])
 salariesDF_by_year.columns = ["sum", "max", "min", "mean"]
 
-if True:
+if False:
 	f, axarr = plt.subplots(4, sharex=True)
 	axarr[0].set_title('Sum by year')
 	axarr[0].plot(salariesDF_by_year.index, salariesDF_by_year["sum"])
@@ -65,7 +65,58 @@ print maxPlayer2009, "\n"
 
 """ maximum player's yearly graph """
 maxPlayerDF = salariesDF[salariesDF["playerID"] == maxPlayerID]
-print maxPlayerDF
-if True:
+
+if False:
 	plt.plot(maxPlayerDF["yearID"], maxPlayerDF["salary"])
+	plt.title("Year data of {}".format(maxPlayerID))
 	plt.show()
+
+""" Relationship between year and salary """
+salaryYearDF = salariesDF[["yearID","salary"]]
+
+def standard(sr):
+	return (sr - sr.mean())/sr.std(ddof=0)
+
+standardizedDF = salaryYearDF.apply(standard)
+
+if False:
+	plt.scatter(standardizedDF["yearID"], standardizedDF["salary"])
+	plt.title("Salaries by year")
+	plt.show()
+
+""" Calculating correlation """
+correlation = (standardizedDF["yearID"] * standardizedDF["salary"]).mean()
+print "Correlation between salaries and year:",correlation
+
+""" Relationship between year and salary """
+salaryYearDF = salariesDF[["yearID","teamID","salary"]].groupby(["yearID","teamID"]).mean()
+
+x = salaryYearDF.index.values
+x = np.array(map(lambda x: int(x[0]), x))
+
+y = salaryYearDF.values.reshape(1, len(salaryYearDF.values))[0]
+
+x = (x - x.mean()) / x.std()
+y = (y - y.mean()) / y.std()
+
+if False:
+	plt.scatter(x,y)
+	plt.title("Means of teams by year")
+	plt.show()
+
+
+""" Calculating correlation """
+correlation = (x * y).mean()
+print "Correlation between mean salaries by team and year:", correlation
+
+salaryYearDF1 = pd.DataFrame((salaryYearDF.index.values), index =np.array(range(len(salaryYearDF))), columns = ["mean"])
+salaryYearDF2 = pd.DataFrame(y, index =np.array(range(len(salaryYearDF))))
+
+salaryYearDFyear = salaryYearDF1["mean"].map(lambda x: x[0])
+salaryYearDFteam = salaryYearDF1["mean"].map(lambda x: x[1])
+salaryYearDFsalary = pd.DataFrame(y, index =np.array(range(len(salaryYearDF))), columns = ["mean"])
+
+""" Find the country with the maximum mean in 2014 """
+maxidxSalary2014 = salaryYearDFsalary[salaryYearDFyear == 2014].idxmax()
+maxTeam2014 = salaryYearDFteam[maxidxSalary2014.values[0]]
+print "Team of maximum mean in 2014:", maxTeam2014
