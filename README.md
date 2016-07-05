@@ -1,5 +1,6 @@
 # Investigating A Baseball Dataset
 ## Source: 2014 Lahman's Baseball Database
+## Udacity Data Analyst Nanodegree - Project 2
 
 I used "Salaries.csv" and "AwardsSharePlayers.csv" for my project and my question to this database is 
     "What factors have an effect on team salaries?"
