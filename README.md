@@ -1,11 +1,6 @@
-<<<<<<< HEAD
-# p2_baseball
-||||||| merged common ancestors
-=======
 # Investigating A Baseball Dataset
 ## Source: 2014 Lahman's Baseball Database
 
-<<<<<<< HEAD
 I used "Salaries.csv" and "AwardsSharePlayers.csv" for my project and my question to this database is 
     "What factors have an effect on team salaries?"
 There are total 5 columns and I am going to analyze yearID, teamID and igID to investigate how these columns are related to salaries.
@@ -2034,10 +2029,3 @@ print "Team with the maximum mean of salaries in 2014:", maxTeam2014
 ```
 
     Team with the maximum mean of salaries in 2014: SFN
-    
-||||||| merged common ancestors
-Look into index.html file to see the project.
-=======
-Look into index.html file to see the project.
->>>>>>> f866d7b1bdd7a072f04a5bc037fa43e36ab71001
->>>>>>> 60550c636927ba4fcb7e91264c720eae7015d180
